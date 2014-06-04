@@ -6,7 +6,7 @@ var cpt2 = 0;
 
 vertx.setPeriodic(1000,function () {
 	
-	console.log('Periodic iteartion each 1000ms');
+	console.log('Periodic iteration each 1000ms');
 
 	eventbus.publish('tech.lunch.1','[' + new Date() + ' - tech.lunch.1 - msg n° ' + cpt1 +'] Hello Tech Lunch  ');
 	cpt1++;
@@ -14,7 +14,7 @@ vertx.setPeriodic(1000,function () {
 
 vertx.setPeriodic(1500, function () {
 
-	console.log('Periodic iteartion each 1500ms');
+	console.log('Periodic iteration each 1500ms');
 	
 	eventbus.publish('tech.lunch.2','[' + new Date() + ' - tech.lunch.2 - msg n° ' + cpt2 +'] Hello Tech Lunch');
 	cpt2++;
