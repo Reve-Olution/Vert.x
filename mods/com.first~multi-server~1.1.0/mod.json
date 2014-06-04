@@ -1,0 +1,7 @@
+{
+	//verticle de démarrage
+	"main":"app.js",
+	"auto-redeploy": true,
+	"description": "Ce module implément un serveur http sur le port Java, Javascript",
+	"author": "Seb Chèvre"
+}

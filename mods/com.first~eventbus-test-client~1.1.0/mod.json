@@ -1,0 +1,5 @@
+{
+	//verticle de démarrage
+	"main":"eventbus-client.js"
+	
+}

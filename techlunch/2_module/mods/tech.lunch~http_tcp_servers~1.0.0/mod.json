@@ -1,0 +1,4 @@
+{
+  "main": "app_full_config.js",
+  "auto-redeploy": true
+}

@@ -1,0 +1,4 @@
+{
+	"main":"simpleServer.js",
+	"auto-redeploy": true
+}

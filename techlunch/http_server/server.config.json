@@ -1,0 +1,11 @@
+{
+	"port":9090,
+	"multiserver":{
+		"groovy": {
+			"port":9999
+		},
+		"js":{
+			"port":8888
+		}
+	}
+}

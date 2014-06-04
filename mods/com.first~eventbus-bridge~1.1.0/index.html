@@ -1,0 +1,88 @@
+<!doctype html>
+
+
+<html lang="fr">
+	<head>
+		<script src="jquery-1.11.js"></script>
+<script src="sockjs-0.3.4.min.js"></script>
+<script src="vertxbus-2.1.js"></script>
+<script>
+	var bus;
+	var $test1ListenBtn;
+	var $test2ListenBtn;
+	var $test3ListenBtn;
+		
+	$(function () {
+		$connectButton = $('#connectBtn');
+		$test1ListenBtn = $('#test1ListenBtn');
+		$test2ListenBtn = $('#test2ListenBtn');
+		$test3ListenBtn = $('#test3ListenBtn');
+		
+	
+		bus = new vertx.EventBus("http://localhost:9999/eventbus");
+		
+		bus.onopen = function() {
+			console.log('bus opened');
+		}
+		
+		bus.onclose = function () {
+			console.log('closing bus');
+		}
+		
+		var followScroll = function () {
+			$("#status").scrollTop($("#status")[0].scrollHeight);
+		}
+		
+		$test1ListenBtn.on('click', function () {
+			bus.registerHandler("welcome-queue", function (message,r) {
+					var str = "<code  style='color:green'>" + message + "</code><br/>";
+					$('#status').append(str);
+					followScroll();
+				})
+		});
+		
+		$test2ListenBtn.on('click', function () {
+			bus.registerHandler("helloWorld-queue", function (message,r) {
+				var str = "<code  style='color:blue'>" + message + "</code><br/>";
+				$('#status').append(str);
+				followScroll();
+			})
+		});
+		
+		$test3ListenBtn.on('click', function () {
+			bus.registerHandler("json-queue", function (message,r) {
+				var str = "<code style='color:red'>" + message + "</code><br/>";
+				$('#status').append(str);
+				followScroll();
+			})
+		});
+		
+	});
+	
+</script>
+	
+	<link rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.css">
+	</head>
+	<body>
+		
+		<div class="news"><h1>Vert.x Event Bus Exemple</h1></div><br/>
+		
+		<div  class="panel panel-primary" style="margin:50px;">
+			<div class="panel-heading">
+				<h3 class="panel-title">Eventbus messages</h3>
+			</div>
+			<div  class="panel-body" style="width:100%;height:350px;overflow:scroll" id="status"></div><br/>
+			
+			<div class="panel-footer">
+				<button id ="test1ListenBtn" type="button" class="btn btn-default">[welcome-queue]</button>
+				<button id ="test2ListenBtn" type="button" class="btn btn-default">[helloWorld-queue]</button>
+				<button id ="test3ListenBtn" type="button" class="btn btn-default">[json-queue]</button>
+				
+				
+			</div>
+		</div>
+		
+		
+		
+	</body>
+</html>

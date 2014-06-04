@@ -1,0 +1,8 @@
+{
+    "port": {
+	    "java":		7070,
+	    "js":		7071,
+	    "groovy":	7072
+    },
+    "host": "localhost"
+}

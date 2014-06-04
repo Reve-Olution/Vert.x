@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<!-- sock.js -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/0.3.4/sockjs.min.js"></script>
+		<!-- eventbus client -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/vertx/2.0.0/vertxbus.min.js"></script>
+		<!-- jquery -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		
+		<script>
+			
+			$(function () {
+				
+				var eventBusUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/eventbus';
+
+				var eventBus = new vertx.EventBus(eventBusUrl);
+				
+				var $nameField = $('#task_name');
+				var $dureeField = $('#task_duree');
+				var $saveBtn = $('#save_btn');
+				
+				
+				eventBus.onopen = function () {
+					
+					console.log('eventbus open');
+					
+					$saveBtn.on('click',function () {
+						eventBus.send('task.save',{name:$nameField.val(),duree:$dureeField.val()} ,function (result) {
+							console.log(result);
+							$('#tasks_list').append(result.name + ' : ' + result.duree + '<br/>');
+						})
+					});	
+					
+					
+					eventBus.send('task.list',{} ,function (result) {
+							$.each(result.tasks, function() {
+					        	$('#tasks_list').append(this.name + ' : ' + this.duree + '<br/>');
+							});
+						})
+					
+				};
+			})
+		</script>
+	</head>
+	
+	<body>
+		
+		<div id="tasks_list"></div>
+		
+		<label>Nom:</label>
+		<input id="task_name" type="text"/>
+		
+		<label>Durée:</label>
+		<input id="task_duree" type="texte"/> 
+		
+		<button id="save_btn">Sauver</button>
+
+		
+	</body>
+</html>

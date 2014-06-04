@@ -1,0 +1,4 @@
+{
+	"main":"simpleRmServer.js",
+	"auto-redeploy": true
+}

@@ -1,0 +1,7 @@
+{
+	//verticle de démarrage
+	"main":"server.js",
+	"auto-redeploy": true,
+	"description": "Ce module implément un serveur http sur le port 7070",
+	"author": "Seb Chèvre"
+}

@@ -1,0 +1,27 @@
+#first_colone{
+	margin-top:40px;
+	width:45%;
+	margin-left:3%;
+	float:left;
+}
+
+
+#second_colone{
+	margin-top:40px;
+	width:45%;
+	margin-left:3%;
+	float:left;
+}
+
+.btn-delete{
+	/*float:right;*/
+	margin-right: 20px;
+}
+
+.red{
+	color:red;
+}
+
+.green{
+	color:green;
+}
