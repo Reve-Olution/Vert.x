@@ -9,6 +9,7 @@ var app = {
 	
 	/** eventbus **/
 	eventBus				:'',
+	eventBusUri				:'http://localhost:9090/eventbus',
 	
 	labels : {
 		login_error			:'<div class="alert alert-danger login-error">[]</div>',
@@ -27,7 +28,7 @@ var app = {
 		
 		this.initGUI();
 		
-		eventBus = new vertx.EventBus("http://localhost:9090/eventbus");
+		eventBus = new vertx.EventBus(this.eventBusUri);
 		//connexion eventbus ok
 		var that = this;
 		eventBus.onopen = function () {
