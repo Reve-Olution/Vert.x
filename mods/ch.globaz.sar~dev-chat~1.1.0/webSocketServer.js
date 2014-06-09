@@ -56,11 +56,12 @@ vertx.setPeriodic(15000,function () {
 				var index = users.indexOf(user);
 				
 				users.splice(index,1);
-				eventBus.unregisterHandler(busAdress);
+				eventBus.unregisterHandler(busAdress, function () {});
 				
 				eventBus.publish('user.status',{
 					'status':200,
-					'users':users}
+					'users':users,
+					'userDisconnect':user}
 				);
 				
 			}

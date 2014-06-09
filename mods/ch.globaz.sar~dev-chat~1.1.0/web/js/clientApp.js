@@ -48,11 +48,16 @@ var app = {
 		var that = this;
 		//ecoute utilisateur connecté
 		eventBus.registerHandler('user.logged', function (message) {
+			var ta = new TinyAlert();
+			ta.show('Utilisateur connect&eacute;',message.username + ' just connected...');
 			that.displayUsers(message.users);						
 		});
 				
 		//Ecoute mise à jour users
 		eventBus.registerHandler('user.status', function (message) {
+			var taa= new TinyAlert();
+			taa.show('Utilisateur d&eacute;connect&eacute;',message.userDisconnect + ' seems to be disconnected...');
+
 			console.log(message.users);
 			that.displayUsers(message.users);						
 		});
