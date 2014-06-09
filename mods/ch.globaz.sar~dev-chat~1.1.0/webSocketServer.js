@@ -15,19 +15,22 @@ eventBus.registerHandler('user.ask_login', function (message, reponse) {
 		users.push(message.userName);
 		reponse({'status':200});
 		console.log('ok');
+		
+		//Envoi de publication utilisateur connecté
+		eventBus.publish('user.logged',{
+			'status':200,
+			'username':message.userName,
+			'message':message, 
+			'users':users}
+		);
 	}else{
 		reponse({'status':999});
 		console.log('pas ok');
 	}
 	
 	
-	//Envoi de publication utilisateur connecté
-	eventBus.publish('user.logged',{
-		'status':200,
-		'username':message.userName,
-		'message':message, 
-		'users':users}
-	);
+	
+	
 });
 
 /**

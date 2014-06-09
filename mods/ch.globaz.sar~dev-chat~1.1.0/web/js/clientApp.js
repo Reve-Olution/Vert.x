@@ -11,10 +11,12 @@ var app = {
 	eventBus				:'',
 	
 	labels : {
-		login_error			:'<div class="alert alert-danger login-error">...</div>',
+		login_error			:'<div class="alert alert-danger login-error">[]</div>',
 		login_msg 			:'<input type="text" id="pseudo"></input>',
 		login_title			:'Entrez votre pseudo:',
-		welcome_msg			:'Bienvenue '
+		welcome_msg			:'Bienvenue ',
+		login_not_valid		:'Le login ne peut pas &ecirc;tre vide',
+		login_already_used	:'Ce login est d&eacute;j&agrave; utilis&eacute;'
 	},
 	
 	userName				:'',
@@ -87,12 +89,19 @@ var app = {
 	/**
 	Affichage de la modal de login
 	*/
-	showLogWindow : function () {
+	showLogWindow : function (errorMessage) {
 		var that = this;
+		
+		var errorMsgToAppend = '';
+		console.log(errorMessage);
+		if(errorMessage !== undefined){
+			errorMsgToAppend = that.labels.login_error;
+			errorMsgToAppend = errorMsgToAppend.replace('[]',errorMessage);
+		}
 		
 		BootstrapDialog.show({
             title	: that.labels.login_title,
-            message	: that.labels.login_msg + that.labels.login_error,
+            message	: that.labels.login_msg + errorMsgToAppend,
             closable: false,
             buttons: [{
                 label: 'ok',
@@ -105,11 +114,12 @@ var app = {
                     
                     if(pseudo === null || pseudo === ''){
                     	dialog.close();
-	                    that.showLogWindow();
+	                    that.showLogWindow(that.labels.login_not_valid);
                     }else{
 	                    userName = pseudo;
-	                    $chat_header.html(that.labels.welcome_msg + userName);
+	                    
 	                    that.login();
+	                    
 	                    dialog.close();
 	                    $input_message.focus();
                     }
@@ -122,8 +132,7 @@ var app = {
 		var that = this;
 		
 		//Envoi de demande de login sur le bus
-		eventBus.send('user.ask_login', {
-			'userName':userName}, function (reponse) {
+		eventBus.send('user.ask_login', {'userName':userName}, function (reponse) {
 				if(reponse.status === 200){
 					$btn_send_message.on('click', function () {
 						if($input_message.val().length > 0){
@@ -143,8 +152,10 @@ var app = {
 						console.log('MESSAGE!');
 						reply('ok');						
 					});
+					$chat_header.html(that.labels.welcome_msg + userName);
 				}else{
-					that.showLogWindow();
+					that.showLogWindow(that.labels.login_already_used);
+					
 				}
 			})
    },
