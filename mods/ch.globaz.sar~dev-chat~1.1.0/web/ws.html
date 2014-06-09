@@ -5,6 +5,7 @@
 	
 	<link rel="stylesheet" href="css/bootstrap-dialog.css"/>
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/app.css"/>
 	
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -28,19 +29,21 @@
 <body>
 	<div class="news"><h1>sar dev chat</h1></div><br/>
 		
-		<div  class="panel panel-primary" style="margin:50px;">
+		<div class="panel panel-primary main-panel">
+			
 			<div class="panel-heading">
 				<h3 id="chat_header" class="panel-title">[Chat]</h3>
 			</div>
-			<div class="row">
-			  <div class="col-md-10">
-				<div id="message_zone" class="panel-body" style="height:350px;overflow:scroll"></div><br/>
-			  </div>
-			  
-			  <div class="col-md-2">
-				<div id="userListContainer" class="panel-body" style="border:1px solid black;"></div>
-			  </div>
 			
+			<div class="row">
+				<div class="col-md-10">
+					<div id="message_zone" class="panel-body">
+					</div><br/>
+				</div>
+			  
+				<div class="col-md-2">
+					<div id="userListContainer" class="panel-body"></div>
+				</div>
 			</div>
 			
 			

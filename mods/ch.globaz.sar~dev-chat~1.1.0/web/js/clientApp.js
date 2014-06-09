@@ -11,10 +11,13 @@ var app = {
 	eventBus				:'',
 	
 	labels : {
+		login_error			:'<div class="alert alert-danger login-error">...</div>',
 		login_msg 			:'<input type="text" id="pseudo"></input>',
 		login_title			:'Entrez votre pseudo:',
 		welcome_msg			:'Bienvenue '
 	},
+	
+	userName				:'',
 	/**
 	Démarrage de l'application
 	*/
@@ -45,11 +48,15 @@ var app = {
 			that.displayUsers(message.users);						
 		});
 				
-		eventBus.registerHandler("users/which", function (message, reply) {
-			console.log(message);
-			console.log(reply);
-			reply(userName);
+		//Ecoute mise à jour users
+		eventBus.registerHandler('user.status', function (message) {
+			console.log(message.users);
+			that.displayUsers(message.users);						
 		});
+		
+		
+		
+		
 	},
 	
 	/**
@@ -85,7 +92,7 @@ var app = {
 		
 		BootstrapDialog.show({
             title	: that.labels.login_title,
-            message	: that.labels.login_msg,
+            message	: that.labels.login_msg + that.labels.login_error,
             closable: false,
             buttons: [{
                 label: 'ok',
@@ -98,7 +105,7 @@ var app = {
                     
                     if(pseudo === null || pseudo === ''){
                     	dialog.close();
-	                    that.showLogWindow(login_msg + error_login_appender_msg);
+	                    that.showLogWindow();
                     }else{
 	                    userName = pseudo;
 	                    $chat_header.html(that.labels.welcome_msg + userName);
@@ -129,6 +136,15 @@ var app = {
 						$message_zone.append(message.userName + ": " + message.text + "<br/>");
 						that.followScroll ();
 					});
+					
+					console.log('user.' + userName);
+					//Ecoute bus user unique
+					eventBus.registerHandler('user.' + userName, function (message,reply) {
+						console.log('MESSAGE!');
+						reply('ok');						
+					});
+				}else{
+					that.showLogWindow();
 				}
 			})
    },
@@ -143,9 +159,9 @@ var app = {
 			BootstrapDialog.alert({
 	            title: 'Connection perdue',
 	            message: '<h4>La connexion avec le serveur &agrave; &eacute;t&eacute; perdue!<br/>La page va &ecirc;tre recharg&eacute;e</h4>',
-	            type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
-	            closable: true, // <-- Default value is tr&ecirc
-	            buttonLabel: 'Ok', // <-- Default value is 'O
+	            type: BootstrapDialog.TYPE_WARNING, 
+	            closable: true, 	            
+	            buttonLabel: 'Ok', 
 	            callback: function(result) {
 	                window.location.href = "http://localhost:9090";
 	            }

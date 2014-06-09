@@ -1,0 +1,8 @@
+.main-panel{
+	margin:50px;;
+}
+
+#message_zone{
+	height:350px;
+	overflow:scroll;
+}

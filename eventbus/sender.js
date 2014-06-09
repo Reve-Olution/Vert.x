@@ -8,7 +8,7 @@ vertx.setPeriodic(1000,function () {
 
 	console.log('Periodic iteartion each 1000ms');
 	
-	eventbus.send('tech.lunch.1','[' + new Date() + ' - tech.lunch.1 - msg n° ' + cpt1 +'] Hello Tech Lunch  ', function (reply){
+	eventbus.publish('tech.lunch.1','[' + new Date() + ' - tech.lunch.1 - msg n° ' + cpt1 +'] Hello Tech Lunch  ', function (reply){
 		console.log('reply: ' + reply);
 	});
 	cpt1++;
@@ -18,7 +18,7 @@ vertx.setPeriodic(1500, function () {
 
 	console.log('Periodic iteartion each 1500ms');
 	
-	eventbus.send('tech.lunch.2','[' + new Date() + ' - tech.lunch.2 - msg n° ' + cpt2 +'] Hello Tech Lunch');
+	eventbus.publish('tech.lunch.2','[' + new Date() + ' - tech.lunch.2 - msg n° ' + cpt2 +'] Hello Tech Lunch');
 	cpt2++;
 });
 
