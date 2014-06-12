@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Vert.x chat</title>
+
+		<!-- feuilles de style -->
+		<link rel="stylesheet" href="css/bootstrap-dialog.css"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/app.css"/>
+		<link rel="stylesheet" href="css/tiny_alert.css"/>
+
+		<!-- javascript -->		
+		<script src="js/jquery-2.1.1.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-dialog.js"></script>
+		<script src="js/mootools-core-1.5.0-full-nocompat.js"></script>
+		<script src="js/tiny_alert_compressed.js"></script>
+	
+		<!-- script pour evenbus -->		
+		<script src="js/sockjs-0.3.4.min.js"></script>
+		<script src="js/vertxbus-2.1.js"></script>
+		
+		<!-- app main script -->
+		<script src="js/clientApp.js"></script>
+	
+		<!-- chargement app -->
+		<script>
+	
+			$(function () {
+				app.start();
+			});
+	
+		</script>
+	
+	</head>
+
+	<body>
+		<!-- titre app -->
+		<div id="title" class="page-header">
+		 	<h1>Vert.x based chat <small>Eventbus sample chat</small></h1>
+		</div>
+
+		
+		<!-- panneau principal -->
+		<div class="panel panel-primary main-panel">
+			<!-- header panel -->
+			<div class="panel-heading">
+				<h3 id="chat_header" class="panel-title">[Chat]</h3>
+			</div>
+			
+			<!-- zone messages et liste utilisateurs -->
+			<div class="row">
+				<div class="col-md-10">
+					<div id="message_zone" class="panel-body">
+					</div><br/>
+				</div>
+			  
+				<div class="col-md-2">
+					<!--<div id="userListContainer" class="panel-body"></div>-->
+					<div class="panel panel-info">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Utilisateurs</h3>
+					  </div>
+					  <div class="panel-body" id="userListContainer">
+					    
+					  </div>
+					</div>
+
+				</div>
+			</div>
+			
+			<!-- footer, zone saisie message -->
+			<div class="panel-footer">
+				<input id="input_message" size="190" type="text" name="message" value=""/>
+				<input id="btn_send_message" class="btn btn-danger" type="button" value="Envoi"/>
+			</div>
+			
+		</div><!-- fin panneau principal -->
+	</body>
+</html>

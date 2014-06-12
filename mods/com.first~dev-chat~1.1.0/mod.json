@@ -1,0 +1,7 @@
+{
+	//verticle de démarrage
+	"main":"webSocketServer.js",
+	"auto-redeploy": true,
+	"description": "Ce module implémente un serveur WebSocket ",
+	"author": "Seb Chèvre"
+}

@@ -1,0 +1,21 @@
+.main-panel{
+	margin:50px;
+}
+
+#title{
+	margin:50px;
+}
+
+#message_zone{
+	height:350px;
+	overflow:scroll;
+}
+
+#userListContainer{
+	
+	height:100%;
+}
+
+.login-error{
+	margin-top:10px;
+}
